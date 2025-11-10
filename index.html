@@ -1,559 +1,574 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JuiceBox - Never forget to charge your devices again. Smart battery tracking for all your rechargeable devices.">
-    <meta property="og:title" content="JuiceBox - Smart Battery Tracking for iOS">
-    <meta property="og:description" content="Never forget to charge your devices again. Smart battery tracking with HomeKit integration.">
-    <meta property="og:url" content="https://getjuicebox.app">
-    <title>JuiceBox - Smart Battery Tracking for iOS</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-light: #ffffff;
-            --bg-dark: #1a1a1a;
-            --text-light: #333333;
-            --text-dark: #f5f5f5;
-            --gray-100: #f7f7f7;
-            --gray-200: #e5e5e5;
-            --gray-800: #2a2a2a;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background: var(--bg-light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-        }
-
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            padding: 100px 0 80px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-icon {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 30px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(16, 185, 129, 0.3));
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--text-light);
-            line-height: 1.2;
-        }
-
-        .hero .highlight {
-            color: var(--primary);
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 35px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--text-light);
-            border: 2px solid var(--gray-200);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 60px;
-            color: var(--text-light);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            padding: 30px;
-            border-radius: 16px;
-            background: var(--gray-100);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: var(--text-light);
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.7;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 80px 0;
-            background: var(--gray-100);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .benefit-check {
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .benefit-item p {
-            color: var(--text-light);
-            font-size: 16px;
-        }
-
-        /* Tech Stack Section */
-        .tech-stack {
-            padding: 80px 0;
-            background: white;
-            text-align: center;
-        }
-
-        .tech-badges {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .tech-badge {
-            padding: 12px 24px;
-            background: var(--gray-100);
-            border-radius: 24px;
-            font-weight: 600;
-            color: var(--text-light);
-            border: 2px solid var(--gray-200);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            text-align: center;
-            color: white;
-        }
-
-        .cta-section h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .cta-section .btn-primary {
-            background: white;
-            color: var(--primary);
-        }
-
-        .cta-section .btn-primary:hover {
-            background: var(--gray-100);
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            background: var(--gray-800);
-            color: var(--text-dark);
-            text-align: center;
-        }
-
-        footer p {
-            margin-bottom: 10px;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="JuiceBox - Never forget to charge your devices again. Smart battery tracking for all your rechargeable devices.">
+        <meta property="og:title" content="JuiceBox - Smart Battery Tracking for iOS">
+        <meta property="og:description"
+            content="Never forget to charge your devices again. Smart battery tracking with HomeKit integration.">
+        <meta property="og:url" content="https://getjuicebox.app">
+        <title>JuiceBox - Smart Battery Tracking for iOS</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
 
-            .hero p {
-                font-size: 18px;
+            :root {
+                --primary: #10b981;
+                --primary-dark: #059669;
+                --success: #10b981;
+                --warning: #f59e0b;
+                --danger: #ef4444;
+                --bg-light: #ffffff;
+                --bg-dark: #1a1a1a;
+                --text-light: #333333;
+                --text-dark: #f5f5f5;
+                --gray-100: #f7f7f7;
+                --gray-200: #e5e5e5;
+                --gray-800: #2a2a2a;
             }
 
-            .hero-icon {
-                width: 120px;
-                height: 120px;
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                line-height: 1.6;
+                color: var(--text-light);
+                background: var(--bg-light);
             }
 
-            .section-title {
-                font-size: 32px;
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* Header */
+            header {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                border-bottom: 1px solid var(--gray-200);
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .logo {
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                letter-spacing: -0.5px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 22%;
+            }
+
+            .logo-icon img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
 
             .nav-links {
-                display: none;
+                display: flex;
+                gap: 30px;
+                list-style: none;
             }
 
-            .features-grid,
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text-light);
+                font-weight: 500;
+                transition: color 0.3s;
+            }
+
+            .nav-links a:hover {
+                color: var(--primary);
+            }
+
+            /* Hero Section */
+            .hero {
+                background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+                padding: 100px 0 80px;
+                text-align: center;
+                position: relative;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .hero-icon {
+                width: 180px;
+                height: 180px;
+                margin: 0 auto 30px;
+                animation: float 3s ease-in-out infinite;
+                border-radius: 22%;
+                overflow: hidden;
+            }
+
+            .hero-icon img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                filter: drop-shadow(0 20px 40px rgba(16, 185, 129, 0.3));
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0px);
+                }
+
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+
+            .hero h1 {
+                font-size: 56px;
+                font-weight: 800;
+                margin-bottom: 20px;
+                color: var(--text-light);
+                line-height: 1.2;
+            }
+
+            .hero .highlight {
+                color: var(--primary);
+            }
+
+            .hero p {
+                font-size: 20px;
+                color: #666;
+                margin-bottom: 40px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-buttons {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                padding: 15px 35px;
+                border-radius: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all 0.3s;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .btn-primary {
+                background: var(--primary);
+                color: white;
+                box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            }
+
+            .btn-primary:hover {
+                background: var(--primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
+            }
+
+            .btn-secondary {
+                background: white;
+                color: var(--text-light);
+                border: 2px solid var(--gray-200);
+            }
+
+            .btn-secondary:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            /* Features Section */
+            .features {
+                padding: 80px 0;
+                background: white;
+            }
+
+            .section-title {
+                text-align: center;
+                font-size: 42px;
+                font-weight: 700;
+                margin-bottom: 60px;
+                color: var(--text-light);
+            }
+
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 40px;
+                margin-top: 40px;
+            }
+
+            .feature-card {
+                padding: 30px;
+                border-radius: 16px;
+                background: var(--gray-100);
+                transition: all 0.3s;
+            }
+
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 22px;
+                margin-bottom: 12px;
+                color: var(--text-light);
+            }
+
+            .feature-card p {
+                color: #666;
+                line-height: 1.7;
+            }
+
+            /* Benefits Section */
+            .benefits {
+                padding: 80px 0;
+                background: var(--gray-100);
+            }
+
             .benefits-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+                margin-top: 40px;
             }
-        }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            .benefit-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 15px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .benefit-check {
+                width: 24px;
+                height: 24px;
+                background: var(--primary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                flex-shrink: 0;
+                margin-top: 2px;
             }
-        }
 
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <img src="imagebox.png" alt="JuiceBox">
+            .benefit-item p {
+                color: var(--text-light);
+                font-size: 16px;
+            }
+
+            /* Tech Stack Section */
+            .tech-stack {
+                padding: 80px 0;
+                background: white;
+                text-align: center;
+            }
+
+            .tech-badges {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 40px;
+            }
+
+            .tech-badge {
+                padding: 12px 24px;
+                background: var(--gray-100);
+                border-radius: 24px;
+                font-weight: 600;
+                color: var(--text-light);
+                border: 2px solid var(--gray-200);
+            }
+
+            /* CTA Section */
+            .cta-section {
+                padding: 80px 0;
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                text-align: center;
+                color: white;
+            }
+
+            .cta-section h2 {
+                font-size: 42px;
+                margin-bottom: 20px;
+            }
+
+            .cta-section p {
+                font-size: 18px;
+                margin-bottom: 40px;
+                opacity: 0.9;
+            }
+
+            .cta-section .btn-primary {
+                background: white;
+                color: var(--primary);
+            }
+
+            .cta-section .btn-primary:hover {
+                background: var(--gray-100);
+            }
+
+            /* Footer */
+            footer {
+                padding: 40px 0;
+                background: var(--gray-800);
+                color: var(--text-dark);
+                text-align: center;
+            }
+
+            footer p {
+                margin-bottom: 10px;
+            }
+
+            footer a {
+                color: var(--primary);
+                text-decoration: none;
+            }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .hero h1 {
+                    font-size: 36px;
+                }
+
+                .hero p {
+                    font-size: 18px;
+                }
+
+                .hero-icon {
+                    width: 120px;
+                    height: 120px;
+                }
+
+                .section-title {
+                    font-size: 32px;
+                }
+
+                .nav-links {
+                    display: none;
+                }
+
+                .features-grid,
+                .benefits-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* Animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .fade-in-up {
+                animation: fadeInUp 0.6s ease-out;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header>
+            <nav class="container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="imagebox.png" alt="JuiceBox">
+                    </div>
+                    <span>JuiceBox</span>
                 </div>
-                <span>JuiceBox</span>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#tech">Technology</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content fade-in-up">
+                <div class="hero-icon">
+                    <img src="imagebox.png" alt="JuiceBox App Icon">
+                </div>
+                <h1>Never Forget to <span class="highlight">Charge</span><br>Your Devices Again</h1>
+                <p>Smart battery tracking for all your rechargeable devices. Get predictive notifications, track charge
+                    cycles, and integrate with HomeKit.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span>Download on App Store</span>
+                        <span>→</span>
+                    </a>
+                </div>
             </div>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#benefits">Benefits</a></li>
-                <li><a href="#tech">Technology</a></li>
-            </ul>
-        </nav>
-    </header>
+        </section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content fade-in-up">
-            <div class="hero-icon">
-                <img src="imagebox.png" alt="JuiceBox App Icon">
-            </div>
-            <h1>Never Forget to <span class="highlight">Charge</span><br>Your Devices Again</h1>
-            <p>Smart battery tracking for all your rechargeable devices. Get predictive notifications, track charge cycles, and integrate with HomeKit.</p>
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">
-                    <span>Download on App Store</span>
-                    <span>→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Powerful Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔮</div>
-                    <h3>Smart Predictions</h3>
-                    <p>Advanced algorithms analyze your charging patterns to predict when devices need attention. Get accurate estimates based on historical data.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔔</div>
-                    <h3>Intelligent Reminders</h3>
-                    <p>Never miss a charge with customizable notifications. Set reminders based on battery percentage or days remaining.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏠</div>
-                    <h3>HomeKit Integration</h3>
-                    <p>Automatically sync battery levels from your HomeKit accessories. Monitor smart home devices alongside your other batteries.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Beautiful Widgets</h3>
-                    <p>Stay informed at a glance with gorgeous home screen widgets. See device status without opening the app.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Organize Your Way</h3>
-                    <p>Create custom categories with icons. Group devices by room, type, or any system that works for you.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Track Charge History</h3>
-                    <p>Complete charge cycle history for every device. Analyze patterns and optimize battery lifecycle management.</p>
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔮</div>
+                        <h3>Smart Predictions</h3>
+                        <p>Advanced algorithms analyze your charging patterns to predict when devices need attention.
+                            Get accurate estimates based on historical data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Intelligent Reminders</h3>
+                        <p>Never miss a charge with customizable notifications. Set reminders based on battery
+                            percentage or days remaining.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏠</div>
+                        <h3>HomeKit Integration</h3>
+                        <p>Automatically sync battery levels from your HomeKit accessories. Monitor smart home devices
+                            alongside your other batteries.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Beautiful Widgets</h3>
+                        <p>Stay informed at a glance with gorgeous home screen widgets. See device status without
+                            opening the app.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Organize Your Way</h3>
+                        <p>Create custom categories with icons. Group devices by room, type, or any system that works
+                            for you.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Track Charge History</h3>
+                        <p>Complete charge cycle history for every device. Analyze patterns and optimize battery
+                            lifecycle management.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
-        <div class="container">
-            <h2 class="section-title">Why Choose JuiceBox?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-check">✓</div>
-                    <p><strong>100% Privacy-Focused</strong> - All data stored locally on your device</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-check">✓</div>
-                    <p><strong>Native iOS Experience</strong> - Built with SwiftUI for maximum performance</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-check">✓</div>
-                    <p><strong>Free & Open Source</strong> - No subscriptions, no ads, forever</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-check">✓</div>
-                    <p><strong>Dark Mode Support</strong> - Beautiful interface in light and dark themes</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-check">✓</div>
-                    <p><strong>No Internet Required</strong> - Works completely offline</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-check">✓</div>
-                    <p><strong>Regular Updates</strong> - Actively maintained with new features</p>
+        <!-- Benefits Section -->
+        <section id="benefits" class="benefits">
+            <div class="container">
+                <h2 class="section-title">Why Choose JuiceBox?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-check">✓</div>
+                        <p><strong>100% Privacy-Focused</strong> - All data stored locally on your device</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-check">✓</div>
+                        <p><strong>Native iOS Experience</strong> - Built with SwiftUI for maximum performance</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-check">✓</div>
+                        <p><strong>Dark Mode Support</strong> - Beautiful interface in light and dark themes</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-check">✓</div>
+                        <p><strong>No Internet Required</strong> - Works completely offline</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-check">✓</div>
+                        <p><strong>Regular Updates</strong> - Actively maintained with new features</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Tech Stack Section -->
-    <section id="tech" class="tech-stack">
-        <div class="container">
-            <h2 class="section-title">Built with Modern Technology</h2>
-            <p style="color: #666; max-width: 700px; margin: 0 auto;">JuiceBox leverages the latest Apple technologies for a seamless, high-performance experience.</p>
-            <div class="tech-badges">
-                <div class="tech-badge">Swift 6.0</div>
-                <div class="tech-badge">SwiftUI</div>
-                <div class="tech-badge">SwiftData</div>
-                <div class="tech-badge">WidgetKit</div>
-                <div class="tech-badge">HomeKit</div>
-                <div class="tech-badge">iOS 18.0+</div>
-                <div class="tech-badge">Strict Concurrency</div>
+        <!-- Tech Stack Section -->
+        <section id="tech" class="tech-stack">
+            <div class="container">
+                <h2 class="section-title">Built with Modern Technology</h2>
+                <p style="color: #666; max-width: 700px; margin: 0 auto;">JuiceBox leverages the latest Apple
+                    technologies for a seamless, high-performance experience.</p>
+                <div class="tech-badges">
+                    <div class="tech-badge">Swift 6.0</div>
+                    <div class="tech-badge">SwiftUI</div>
+                    <div class="tech-badge">SwiftData</div>
+                    <div class="tech-badge">WidgetKit</div>
+                    <div class="tech-badge">HomeKit</div>
+                    <div class="tech-badge">iOS 18.0+</div>
+                    <div class="tech-badge">Strict Concurrency</div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Take Control?</h2>
-            <p>Start tracking your batteries smarter today</p>
-            <a href="#" class="btn btn-primary">Download Now</a>
-        </div>
-    </section>
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Take Control?</h2>
+                <p>Start tracking your batteries smarter today</p>
+                <a href="#" class="btn btn-primary">Download Now</a>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 MC Software Ltd. All rights reserved.</p>
-            <p>
-                <a href="https://getjuicebox.app">getjuicebox.app</a> |
-                <a href="mailto:support@mcsoftware.com">Contact</a>
-            </p>
-        </div>
-    </footer>
-</body>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 MC Software Ltd. All rights reserved.</p>
+                <p>
+                    <a href="https://getjuicebox.app">getjuicebox.app</a> |
+                    <a href="mailto:support@mcsoftware.com">Contact</a>
+                </p>
+            </div>
+        </footer>
+    </body>
+
 </html>
