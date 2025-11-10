@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy for JuiceBox - Smart Battery Tracking for iOS">
+    <title>Privacy Policy - JuiceBox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --bg-light: #ffffff;
+            --text-light: #333333;
+            --gray-100: #f7f7f7;
+            --gray-200: #e5e5e5;
+            --gray-800: #2a2a2a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 22%;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0 80px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .last-updated {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        ul {
+            margin-bottom: 20px;
+            margin-left: 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        strong {
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background: var(--gray-800);
+            color: #f5f5f5;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            main {
+                padding: 40px 0 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="imagebox.png" alt="JuiceBox">
+                </div>
+                <span>JuiceBox</span>
+            </a>
+            <a href="index.html" class="back-link">Back to Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated"><strong>Last Updated:</strong> November 10, 2025</p>
+
+            <h2>Overview</h2>
+            <p>
+                At JuiceBox, your privacy is our top priority. We are committed to protecting your personal information
+                and being transparent about our data practices. This Privacy Policy explains how we handle your
+                information when you use the JuiceBox application.
+            </p>
+
+            <h2>Data Collection</h2>
+            <p>
+                <strong>We do not collect any personal data.</strong> JuiceBox is designed with privacy at its core:
+            </p>
+            <ul>
+                <li>No personal information is collected</li>
+                <li>No usage analytics or tracking</li>
+                <li>No advertising or third-party trackers</li>
+                <li>No account creation or login required</li>
+                <li>No server communication or cloud storage</li>
+            </ul>
+
+            <h2>Local Data Storage</h2>
+            <p>
+                All data you create within JuiceBox is stored exclusively on your device using Apple's secure local
+                storage technologies (SwiftData). This includes:
+            </p>
+            <ul>
+                <li>Battery device information you manually enter</li>
+                <li>Charge history and tracking data</li>
+                <li>Custom categories and preferences</li>
+                <li>Widget configurations</li>
+            </ul>
+            <p>
+                This data remains on your device and is never transmitted to our servers or any third parties.
+            </p>
+
+            <h2>HomeKit Integration</h2>
+            <p>
+                JuiceBox can optionally access your HomeKit accessories to display battery levels. This integration:
+            </p>
+            <ul>
+                <li>Requires your explicit permission via iOS system prompts</li>
+                <li>Only accesses battery level information from HomeKit devices</li>
+                <li>Processes all HomeKit data locally on your device</li>
+                <li>Does not transmit any HomeKit data to external servers</li>
+            </ul>
+            <p>
+                You can revoke HomeKit access at any time through your iOS Settings app.
+            </p>
+
+            <h2>Third-Party Services</h2>
+            <p>
+                JuiceBox does not use any third-party services, analytics tools, or advertising networks. The app
+                operates completely independently and offline.
+            </p>
+
+            <h2>Data Backup and iCloud</h2>
+            <p>
+                If you have iCloud Backup enabled on your device, your JuiceBox data may be included in your encrypted
+                iCloud backup. This backup is:
+            </p>
+            <ul>
+                <li>Controlled entirely by your iOS device settings</li>
+                <li>Encrypted by Apple</li>
+                <li>Accessible only by you through your Apple ID</li>
+                <li>Not accessible to JuiceBox developers or MC Software Ltd</li>
+            </ul>
+
+            <h2>Children's Privacy</h2>
+            <p>
+                JuiceBox does not collect any personal information from anyone, including children under the age of 13.
+                The app is safe for users of all ages.
+            </p>
+
+            <h2>Your Rights</h2>
+            <p>
+                Since we do not collect any personal data, there is no information for us to access, modify, or delete.
+                You maintain complete control over your data through your device:
+            </p>
+            <ul>
+                <li>All data can be deleted by uninstalling the app</li>
+                <li>Individual items can be deleted within the app interface</li>
+                <li>No request to us is necessary to remove your data</li>
+            </ul>
+
+            <h2>Changes to This Policy</h2>
+            <p>
+                We may update this Privacy Policy from time to time. Any changes will be reflected in the app and on
+                this website with an updated "Last Updated" date. We encourage you to review this policy periodically.
+            </p>
+
+            <h2>Contact Us</h2>
+            <p>
+                If you have any questions about this Privacy Policy or JuiceBox's privacy practices, please contact us:
+            </p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:support@mcsoftware.com"
+                        style="color: var(--primary);">support@mcsoftware.com</a></li>
+                <li><strong>Website:</strong> <a href="https://getjuicebox.app"
+                        style="color: var(--primary);">getjuicebox.app</a></li>
+            </ul>
+
+            <h2>Developer Information</h2>
+            <p>
+                JuiceBox is developed and maintained by:<br>
+                <strong>MC Software Ltd</strong><br>
+                A company committed to building privacy-focused applications.
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MC Software Ltd. All rights reserved.</p>
+            <p>
+                <a href="index.html">Home</a> |
+                <a href="privacy.html">Privacy Policy</a> |
+                <a href="terms.html">Terms and Conditions</a>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
