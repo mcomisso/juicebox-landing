@@ -84,10 +84,7 @@ With your actual App Store URL:
 
 ### Update GitHub Links
 
-The GitHub repository link is currently set to:
-- `https://github.com/matcom/BatteryLogger-iOS`
-
-Update if your username is different.
+If you want to add a GitHub repository link, you can add it to the navigation menu and footer.
 
 ### Add Screenshots
 
